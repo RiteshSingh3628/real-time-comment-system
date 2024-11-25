@@ -18,6 +18,11 @@ const io = new Server(server);
 app.use(bodyParser.json());
 app.use(cors())
 
+app.use((req, res, next) => {
+    req.io = io; // Attach the io instance
+    next();      // Ensure the next middleware or route executes
+});
+
 // Handle socket connection
 io.on('connection',(socket) =>{
     console.log("A user connected",client.id);
