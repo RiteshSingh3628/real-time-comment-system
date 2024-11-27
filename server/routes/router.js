@@ -10,6 +10,7 @@ router.get('/',(req,resp)=>{
 // router to login
 router.post('/login',(req,resp)=>{
     const {username} = req.body;
+    console.log(username)
     const sessioId = Date.now();
     resp.json({username,sessioId});
 })
