@@ -11,7 +11,7 @@ const commentRouter = require('./routes/router')
 const app = express()
 const server =  http.createServer(app)
 // creating io server
-const io = new Server(server);
+const io = new Server(server,{cors:{origin:'*'}});
 
 
 // middleware
@@ -25,12 +25,12 @@ app.use((req, res, next) => {
 
 // Handle socket connection
 io.on('connection',(socket) =>{
-    console.log("A user connected",client.id);
+    console.log("A user connected",socket.id);
 
-    socket.on("new comment",(comment)=>{
-        io.emit("chat message",comment); //Broadcast message to all client
+    // socket.on("new comment",(comment)=>{
+    //     io.emit("chat message",comment); //Broadcast message to all client
 
-    })
+    // })
 
     socket.on("disconnect",()=>{
         console.log("User disconnected");
