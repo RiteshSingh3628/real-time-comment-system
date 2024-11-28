@@ -1,8 +1,10 @@
 'use client'
 import { useState } from "react";
-import { useRouter } from "next/compat/router";
+// import { useRouter } from "next/compat/router";
 import {Box, Button,TextField,Typography,Alert,Snackbar} from '@mui/material'
-import api from "../utils/api";
+import api from "../../utils/api";
+
+import {useRouter} from "next/navigation"
 
 
 
@@ -19,7 +21,7 @@ function Login() {
 
   //Handling login function 
   const handleLogin = async()=>{
-    // if (!router) return; // Ensure router is initializedcketsocket
+    if (!router) return; // Ensure router is initializedcketsocket
     try{
       // Post request
       const res = await api.post('/login',{username});
@@ -32,7 +34,7 @@ function Login() {
       setResponseMessage(`Login successful`)
       setSeverity("success")
       setOpen(true)
-      router.push('/comments');
+      router.push('/Comments');
 
 
     }catch(err){

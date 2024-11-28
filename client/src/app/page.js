@@ -1,5 +1,5 @@
-import Login from "../components/Login"
-import comments from "../pages/comments"
+
+import Login from "../app/login/page"
 export default function Home() {
   return (
     <Login/>

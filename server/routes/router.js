@@ -15,14 +15,14 @@ router.post('/login',(req,resp)=>{
 
 //router to post comment 
 router.post('/comments',(req,resp)=>{
-    const {username,comment} = req.body;
+    const {username,comments} = req.body;
     const q = "INSERT INTO comments(username,comments) VALUES (?,?)"
-    const values = [username,comment];
+    const values = [username,comments];
    
     db.query(q,values,(err)=>{
         if(err) return resp.status(500).json({error:"Error posting comment"})
         const io = req.io;//req.io ensures that every request has access to io
-        io.emit('newComment',{username,comment,timestamp:new Date})
+        io.emit('newComment',{username,comments,timestamp:new Date})
         return resp.status(200).json("comment added")
 
     })
