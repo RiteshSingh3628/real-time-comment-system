@@ -5,6 +5,7 @@ import { Box,Button,FormControl,OutlinedInput} from '@mui/material';
 import api from '../../utils/api'
 import socket from '../../socket'
 import { formatDistanceToNow } from "date-fns";
+import {useRouter} from "next/navigation"
 
 const Comments = ()=>{
     
@@ -31,6 +32,7 @@ const Comments = ()=>{
 
 
     },[])
+    const router = useRouter();
 
 
     // handling new post comments
@@ -45,11 +47,14 @@ const Comments = ()=>{
       }
     }
     
-    
+    const handleLogout = ()=>{
+      router.push('/login')
+
+    }
 
 
     return(
-        <Box
+      <Box
       sx={{
         display: "flex",
         justifyContent: "center",
@@ -59,14 +64,17 @@ const Comments = ()=>{
         flexDirection:"column",
         width:{
           xs:"100%",
-          sm:"200%",
-          md:800
-
+          sm:"80%",
+          md:"60%"
+          
         },
         margin:"0 auto"
       }}>
-        <h1 style={{color:"orange"}} >REAL-TIME COMMENT SYSTEM</h1>
         {/* comment screen */}
+        <div style={{display:"flex",padding:"20px 10px",justifyContent:"space-between",alignItems:"center"}}>
+          <h3 style={{color:"#415a77"}} >REAL-TIME COMMENT SYSTEM</h3>
+          <Button varient="contained" onClick={handleLogout} sx={{backgroundColor:"#1b263b",color:"white",width:"10%",height:"50px"}}>Logout</Button>
+        </div>
         <Box 
             sx={{
               display: "flex",
@@ -86,7 +94,7 @@ const Comments = ()=>{
           {/* render all comments */}
           {
             
-            !comments? <div style={{color:"black"}}>No comments</div>
+            !comments? <div style={{color:"black", alignSelf:"center",textAlign:"center",fontSize:"20px"}}>No comments</div>
             :
             comments.map((item,index)=>(
               <div key={index} style={{backgroundColor:"#b8c0ff",opacity:"0.8",borderRadius:"10px",padding:"20px",margin:"0 10px",boxShadow: "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"}}> 
